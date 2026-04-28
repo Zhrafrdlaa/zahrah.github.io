@@ -3,92 +3,488 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZAHRAH FARADILA</title>
+  <title>Zahrah Faradila — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 32px; }
-    header { background: #1d4ed8; color: white; padding: 32px; border-radius: 12px; margin-bottom: 24px; }
-    header h1 { margin: 0 0 8px; font-size: 2rem; }
-    header p  { margin: 4px 0; opacity: .85; }
-    .sosmed { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .sosmed a {
-      background: white; color: #1d4ed8;
-      padding: 6px 16px; border-radius: 8px;
-      text-decoration: none; font-weight: 600; font-size: .9rem;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0a1628;
+      --dark:   #0d2045;
+      --mid:    #1a3a8f;
+      --royal:  #2563eb;
+      --sky:    #38bdf8;
+      --ice:    #bae6fd;
+      --mint:   #a7f3d0;
+      --lavender:#c7d2fe;
+      --white:  #ffffff;
+      --offwhite:#f0f7ff;
+      --gray:   #64748b;
+      --light:  #e0f2fe;
     }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--offwhite);
+      color: #1e293b;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    /* Decorative blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .35;
+      pointer-events: none;
+    }
+    .blob-1 { width: 380px; height: 380px; background: #2563eb; top: -80px; right: -80px; }
+    .blob-2 { width: 260px; height: 260px; background: #38bdf8; bottom: -60px; left: 10%; }
+    .blob-3 { width: 180px; height: 180px; background: #a78bfa; top: 40%; left: -40px; }
+
+    /* Top nav bar accent */
+    .hero-bar {
+      background: linear-gradient(90deg, var(--royal) 0%, var(--sky) 60%, var(--mint) 100%);
+      height: 4px;
+      width: 100%;
+    }
+
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 56px 36px 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .badge {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+    .badge-open { background: rgba(56,189,248,.15); color: var(--sky); border: 1px solid rgba(56,189,248,.3); }
+    .badge-web  { background: rgba(167,243,208,.12); color: var(--mint); border: 1px solid rgba(167,243,208,.3); }
+
+    .hero h1 {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--sky), var(--mint));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .role {
+      color: var(--lavender);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero .bio {
+      color: rgba(255,255,255,.68);
+      font-size: .92rem;
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 30px;
+    }
+
+    /* Divider line */
+    .hero-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--royal));
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.85);
+      font-size: .82rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .chip:hover { background: rgba(255,255,255,.14); border-color: rgba(56,189,248,.4); }
+    .chip-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sky); flex-shrink: 0; }
+
+    .social-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .social-btn {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: .85rem;
+      padding: 10px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all .2s;
+      letter-spacing: .02em;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--royal), var(--sky));
+      color: white;
+      box-shadow: 0 4px 20px rgba(37,99,235,.4);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(37,99,235,.55); transform: translateY(-2px); }
+    .btn-ghost {
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.15); }
+
+    /* ── WAVE SEPARATOR ── */
+    .wave-wrap { display: block; background: var(--navy); line-height: 0; }
+    .wave-wrap svg { display: block; width: 100%; }
+
+    /* ── BODY ── */
+    .body-wrap { max-width: 800px; margin: 0 auto; padding: 40px 24px 64px; }
+
+    .section { margin-bottom: 52px; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .section-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .icon-blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+    .icon-teal { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+    .icon-purple { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+
+    .section-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -.01em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #bfdbfe 0%, transparent 100%);
+    }
+
+    /* ── EDU CARDS ── */
+    .edu-list { display: flex; flex-direction: column; gap: 10px; }
+    .edu-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 2px 12px rgba(37,99,235,.06);
+      border: 1px solid #e0f2fe;
+      transition: box-shadow .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--royal), var(--sky));
+      border-radius: 0;
+    }
+    .edu-card:hover { box-shadow: 0 8px 28px rgba(37,99,235,.12); transform: translateX(5px); }
+    .edu-dot {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--royal), var(--sky));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 900; font-size: .85rem;
+      flex-shrink: 0;
+    }
+    .edu-info h3 { font-size: .97rem; font-weight: 800; color: #0d2045; margin-bottom: 3px; }
+    .edu-info .role { font-size: .83rem; color: var(--gray); margin-bottom: 6px; }
+    .year-tag {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--royal);
+      font-size: .73rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* ── PROJECT CARDS ── */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .proj-grid { grid-template-columns: 1fr; } }
+
+    .proj-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #e0f2fe;
+      box-shadow: 0 2px 12px rgba(37,99,235,.06);
+      transition: all .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--royal), var(--sky), var(--mint));
+    }
+    .proj-card:hover { box-shadow: 0 12px 32px rgba(37,99,235,.14); transform: translateY(-4px); }
+    .proj-label {
+      font-size: .7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--royal);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      display: inline-block;
+      padding: 3px 10px; border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .proj-card h3 { font-family: 'Raleway', sans-serif; font-size: .97rem; font-weight: 800; color: #0d2045; margin-bottom: 10px; line-height: 1.4; }
+    .proj-card p { font-size: .83rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── SKILL ── */
+    .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .skill-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid #e0f2fe;
+      box-shadow: 0 2px 12px rgba(37,99,235,.06);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .skill-card:hover { box-shadow: 0 8px 28px rgba(37,99,235,.12); transform: translateY(-3px); }
+    .skill-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .skill-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .si-blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+    .si-teal { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+    .si-purple { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+    .skill-name { font-family: 'Raleway', sans-serif; font-size: .82rem; font-weight: 800; color: #0d2045; text-transform: uppercase; letter-spacing: .05em; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: .75rem; font-weight: 700;
+      padding: 4px 11px; border-radius: 7px;
+    }
+    .tag-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .tag-teal { background: #f0fdf4; color: #047857; border: 1px solid #a7f3d0; }
+    .tag-purple { background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: .8rem;
+    }
+    footer span { color: var(--sky); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-inner    { animation: fadeUp .7s ease both; }
+    .section       { animation: fadeUp .5s ease both; }
+    .section:nth-child(1) { animation-delay: .05s; }
+    .section:nth-child(2) { animation-delay: .15s; }
+    .section:nth-child(3) { animation-delay: .25s; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Zahrah Faradila</h1>
-    <p>📍 Batam, Kepulauan Riau</p>
-    <p>✉️ zahrahfaradila1@gmail.com</p>
-    <p>Saya adalah seorang mahasiswa di bidang Teknologi Rekayasa Perangkat Lunak yang memiliki minat dalam pengembangan web, 
-      khususnya menggunakan Laravel dan Tailwind CSS. Saya senang membangun tampilan antarmuka yang modern, responsif, dan user-friendly, 
-      serta terus belajar untuk meningkatkan kemampuan dalam pengembangan aplikasi berbasis web.</p>
-    <div class="sosmed">
-      <a href="www.linkedin.com/in/zahrah-faradila-0857203a7" target="_blank">LinkedIn</a>
-      <a href="https://github.com/Zhrafrdlaa" target="_blank">GitHub</a>
-    </div>
-  </header>
-  <section>
-    <h2>Riwayat Pendidikan</h2>
 
-    <div class="edu-item">
-      <h3>Politeknik Negeri Batam</h3>
-      <p>Jurusan Informatika, Prodi Teknologi Rekayasa Perangkat Lunak</p>
-      <p>2025 – Sekarang</p>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bar"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-inner">
+    <div class="badge-row">
+      <span class="badge badge-open">✦ Open to Opportunities</span>
+      <span class="badge badge-web">Web Developer</span>
     </div>
 
-    <div class="edu-item">
-      <h3>SMKS Putra Jaya School Batam</h3>
-      <p>Jurusan Teknik Komputer Jaringan (TKJ)</p>
-      <p>2022 – 2025 | Nilai Akhir: 92</p>
+    <h1>Zahrah <span>Faradila</span></h1>
+    <div class="role">Mahasiswa TRPL · Politeknik Negeri Batam</div>
+    <div class="hero-divider"></div>
+
+    <p class="bio">Mahasiswa Teknologi Rekayasa Perangkat Lunak yang bersemangat membangun antarmuka web modern menggunakan Laravel dan Tailwind CSS. Fokus pada tampilan yang responsif, bersih, dan user-friendly.</p>
+
+    <div class="chips">
+      <span class="chip"><span class="chip-dot"></span>📍 Batam, Kepulauan Riau</span>
+      <a href="mailto:zahrahfaradila1@gmail.com" class="chip"><span class="chip-dot"></span>✉️ zahrahfaradila1@gmail.com</a>
     </div>
 
-    <div class="edu-item">
-      <h3>SMPN 6 Batam</h3>
-      <p>Sekolah Menengah Pertama</p>
-      <p>2019 – 2022</p>
+    <div class="social-row">
+      <a href="https://www.linkedin.com/in/zahrah-faradila-0857203a7" target="_blank" class="social-btn btn-primary">LinkedIn</a>
+      <a href="https://github.com/Zhrafrdlaa" target="_blank" class="social-btn btn-ghost">GitHub</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <section>
-    <h2>Riwayat Proyek</h2>
+<!-- Wave divider -->
+<div class="wave-wrap">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#f0f7ff"/>
+  </svg>
+</div>
 
-    <div class="edu-item">
-      <h3>Jadwal Keamanan Lingkungan (poSecure) <small>PBL Semester 1</small></h3>
-      <p>Proyek ini merupakan aplikasi keamanan lingkungan berbasis digital (pos ronda) dengan aktor Ketua RT, Petugas Keamanan, dan Warga Laki-laki. 
-        Fitur utamanya adalah absensi berbasis foto secara langsung di lokasi untuk meminimalisir kecurangan dalam kegiatan ronda.</p>
-      <p>Teknologi: [HTML, CSS, JavaScript, dll]</p>
+<!-- BODY -->
+<div class="body-wrap">
+
+  <!-- PENDIDIKAN -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-blue">🎓</div>
+      <div class="section-title">Riwayat Pendidikan</div>
+      <div class="section-line"></div>
     </div>
-
-    <div class="edu-item">
-      <h3>e-Outsourcing</h3>
-      <p>Aplikasi ini dikembangkan untuk PT Ecogreen guna mempermudah pemantauan karyawan outsourcing. 
-        Fitur utamanya meliputi absensi berbasis GPS sesuai lokasi kerja, serta pengajuan lembur, izin, dan sakit yang dikelola oleh HR, 
-        dilengkapi dengan berbagai fitur pendukung lainnya.</p>
+    <div class="edu-list">
+      <div class="edu-card">
+        <div class="edu-dot">PNB</div>
+        <div class="edu-info">
+          <h3>Politeknik Negeri Batam</h3>
+          <div class="role">Informatika · Teknologi Rekayasa Perangkat Lunak</div>
+          <span class="year-tag">2025 – Sekarang</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-dot">SMK</div>
+        <div class="edu-info">
+          <h3>SMKS Putra Jaya School Batam</h3>
+          <div class="role">Teknik Komputer Jaringan (TKJ) · Nilai Akhir: 92</div>
+          <span class="year-tag">2022 – 2025</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-dot">SMP</div>
+        <div class="edu-info">
+          <h3>SMPN 6 Batam</h3>
+          <div class="role">Sekolah Menengah Pertama</div>
+          <span class="year-tag">2019 – 2022</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-  </section>
-
-  <section>
-    <h2>Skillset</h2>
-
-    <div class="edu-item">
-      <h3>💻 Programming Languages</h3>
-      <p>HTML, CSS, JavaScript, Python, PHP</p>
+  <!-- PROYEK -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-teal">💼</div>
+      <div class="section-title">Riwayat Proyek</div>
+      <div class="section-line"></div>
     </div>
-
-    <div class="edu-item">
-      <h3>🛠️ Tools & Frameworks</h3>
-      <p>XAMPP, VS Code, GitHub, Figma, Draw.io, MySQL, Laravel</p>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-label">PBL Semester 1</div>
+        <h3>Jadwal Keamanan Lingkungan (poSecure)</h3>
+        <p>Aplikasi pos ronda digital dengan absensi berbasis foto langsung di lokasi. Aktor: Ketua RT, Petugas Keamanan, dan Warga Laki-laki.</p>
+      </div>
+      <div class="proj-card">
+        <div class="proj-label">PBL Semester 2</div>
+        <h3>e-Outsourcing</h3>
+        <p>Aplikasi pemantauan karyawan outsourcing untuk PT Ecogreen dengan absensi GPS, pengajuan lembur, izin, dan sakit yang dikelola HR.</p>
+      </div>
     </div>
+  </div>
 
-    <div class="edu-item">
-      <h3>🤝 Soft Skills</h3>
-      <p>Komunikasi, Teamwork, Problem Solving, Manajemen Waktu</p>
+  <!-- SKILL -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-purple">⚡</div>
+      <div class="section-title">Skillset</div>
+      <div class="section-line"></div>
     </div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="skill-head">
+          <div class="skill-icon si-blue">💻</div>
+          <div class="skill-name">Languages</div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-blue">HTML</span>
+          <span class="tag tag-blue">CSS</span>
+          <span class="tag tag-blue">JavaScript</span>
+          <span class="tag tag-blue">Python</span>
+          <span class="tag tag-blue">PHP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-head">
+          <div class="skill-icon si-teal">🛠️</div>
+          <div class="skill-name">Tools & Frameworks</div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-teal">Laravel</span>
+          <span class="tag tag-teal">Tailwind</span>
+          <span class="tag tag-teal">MySQL</span>
+          <span class="tag tag-teal">GitHub</span>
+          <span class="tag tag-teal">Figma</span>
+          <span class="tag tag-teal">VS Code</span>
+          <span class="tag tag-teal">XAMPP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-head">
+          <div class="skill-icon si-purple">🤝</div>
+          <div class="skill-name">Soft Skills</div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-purple">Komunikasi</span>
+          <span class="tag tag-purple">Teamwork</span>
+          <span class="tag tag-purple">Problem Solving</span>
+          <span class="tag tag-purple">Manajemen Waktu</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  </section>
+</div>
+
+<footer>
+  &copy; 2026 <span>Zahrah Faradila</span>
+</footer>
+
 </body>
 </html>
